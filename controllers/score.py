@@ -15,7 +15,7 @@ _logger = logging.getLogger(__name__)
 
 class WxappScore(http.Controller, BaseController):
 
-    @http.route('/<string:sub_domain>/score/send/rule', auth='public', methods=['GET'])
+    @http.route('/<string:sub_domain>/score/send/rule', auth='public', methods=['GET','POST'], csrf=False)
     def list(self, sub_domain, code=5, **kwargs):
         try:
             ret, entry = self._check_domain(sub_domain)
@@ -72,14 +72,25 @@ class WxappScore(http.Controller, BaseController):
             return self.res_err(-1, e.name)
 
 
-    @http.route('/<string:sub_domain>/shop/goods/reputation', auth='public', methods=['GET'])
+    @http.route('/<string:sub_domain>/shop/goods/reputation', auth='public', methods=['GET','POST'], csrf=False)
     def reputation(self, sub_domain, goodsId=None, **kwargs):
         try:
             ret, entry = self._check_domain(sub_domain)
             if ret:return ret
 
-            data = []
+            '''_dict = {
+                "id": "4",
+                "reputation": "2",
+                "remark": "xxx"
+            }
 
+            reputations = request.env['sale.order.line'].sudo().search([
+                    ('product_id', '=', goodsId )
+                ])
+ 
+            data = [ {"id":reputation.product_id,"reputation":reputation.reputation, "remark":reputation.reputation_remark} for reputation in reputations]
+            '''
+            data = []
             return self.res_ok(data)
 
         except Exception as e:

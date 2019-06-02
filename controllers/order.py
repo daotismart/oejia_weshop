@@ -205,7 +205,7 @@ class WxappOrder(http.Controller, BaseController):
 
         except Exception as e:
             _logger.exception(e)
-            return self.res_err(-1, e.name)
+            return self.res_err(-1, e)
 
 
     @http.route('/<string:sub_domain>/order/list', auth='public', method=['GET', 'POST'], csrf=False)
@@ -362,7 +362,7 @@ class WxappOrder(http.Controller, BaseController):
             return self.res_err(-1, e.name)
 
 
-    @http.route('/<string:sub_domain>/order/delivery', auth='public', method=['GET'])
+    @http.route('/<string:sub_domain>/order/delivery', auth='public', method=['GET','POST'], csrf=False)
     def delivery(self, sub_domain, token=None, orderId=None, **kwargs):
         '''
         确认收货接口
@@ -395,7 +395,7 @@ class WxappOrder(http.Controller, BaseController):
             return self.res_err(-1, e.name)
 
 
-    @http.route('/<string:sub_domain>/order/reputation', auth='public', method=['GET'])
+    @http.route('/<string:sub_domain>/order/reputation', auth='public', method=['GET','POST'], csrf=False)
     def reputation(self, sub_domain, token=None, order_id=None, reputation=2, **kwargs):
         '''
         评论接口
@@ -410,6 +410,7 @@ class WxappOrder(http.Controller, BaseController):
         }
         '''
         try:
+            _logger.info('>>> kwargs %s ', kwargs)
             post_json = json.loads(kwargs.pop('postJsonString'))
             token = post_json.get('token',None)
             order_id = post_json.get('orderId',None)
@@ -429,6 +430,7 @@ class WxappOrder(http.Controller, BaseController):
             if not order:
                 return self.res_err(404)
 
+            #order.write({'customer_status': 'completed', 'reputation': reputations['reputation'], 'reputation_remark': reputations['remark']})
             order.write({'customer_status': 'completed'})
 
             for reputation in reputations:

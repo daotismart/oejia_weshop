@@ -31,6 +31,8 @@ class SaleOrder(models.Model):
     shipper_id = fields.Many2one('oe.shipper', string='承运商', track_visibility='onchange')
     shipper_no = fields.Char('运单号', track_visibility='onchange')
     shipper_traces = fields.Text('物流信息')
+    reputation = fields.Integer('评价')
+    reputation_remark = fields.Text('详细评价')
 
 
 

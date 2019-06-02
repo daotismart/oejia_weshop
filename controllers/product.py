@@ -30,7 +30,7 @@ class WxappProduct(http.Controller, BaseController):
             "name": '[%s] %s'%(each_goods.default_code, each_goods.name) if each_goods.default_code else each_goods.name,
             "numberFav": each_goods.number_fav,
             "numberGoodReputation": 0,
-            "numberOrders": 0,#each_goods.sales_count,
+            "numberOrders": 0, #each_goods.sales_count,
             "originalPrice": each_goods.original_price,
             "paixu": each_goods.sequence or 0,
             "pic": each_goods.get_main_image(),

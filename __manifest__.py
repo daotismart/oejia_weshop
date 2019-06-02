@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': "WeChat APP Shop",
-    'version': '1.0.0',
+    'version': '1.0.6',
     'category': '',
     'summary': '微信小程序商城',
     'author': 'Oejia',

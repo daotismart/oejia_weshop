@@ -13,8 +13,8 @@ class WxappConfig(models.Model):
 
     mall_name = fields.Char('商城名称', help='显示在小程序顶部')
 
-    app_id = fields.Char('appid')
-    secret = fields.Char('secret')
+    app_id = fields.Char('微信小程序appid')
+    secret = fields.Char('微信小程序secret')
 
     wechat_pay_id = fields.Char('微信支付商户号')
     wechat_pay_secret = fields.Char('微信支付商户秘钥')

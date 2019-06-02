@@ -8,6 +8,7 @@ from . import oe_shipper
 from . import res_partner
 from . import product
 from . import sale_order
+#from . import sale_order_line
 
 from . import wxapp_config
 from . import wxapp_user
