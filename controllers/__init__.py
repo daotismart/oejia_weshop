@@ -13,6 +13,7 @@ from . import address
 from . import order
 from . import notice
 from . import score
+from . import pay
 
 
 from odoo.http import root, JsonRequest, HttpRequest
